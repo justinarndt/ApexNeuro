@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+env/
+.env
+
+# Data (CRITICAL: Do not upload 100GB files)
+*.nwb
+000138/
+data/
+
+# DANDI Metadata
+dandiset.yaml
+
+# Logs & Temporary Benchmarks
+*.log
+results/
+experiments/logs/
+
+# IDE Settings
+.vscode/
+.idea/
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
