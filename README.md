@@ -30,6 +30,20 @@ No kinematics, no daily recalibration, no supervised adaptation.
 
 The green trace (ApexNeuro) tightly tracks sharp, high-velocity movements where static methods fail due to signal damping.
 
+### Head-to-Head Benchmark: ApexNeuro vs. Adaptive Kalman
+We compared ApexNeuro against a standard **Unsupervised Adaptive Kalman Filter** (the academic SOTA for drift).
+
+* **The Test:** Both models trained on Day 0 and tested on Day 40 (Jenkins).
+* **The Failure Mode:** The Kalman filter adapts to *mean shifts* but fails to detect *amplitude damping* (signal shrinkage), causing it to flatline ($R^2 = -0.03$).
+* **The Apex Advantage:** ApexNeuro's Integral Controller detects the energy loss and actively restores the signal gain, recovering full tracking fidelity ($R^2 = 0.67$).
+
+![Head to Head](assets/ApexNeuro_Head_to_Head.png)
+
+| Method | R² Score | Latency | Outcome |
+| :--- | :--- | :--- | :--- |
+| **Adaptive Kalman (SOTA)** | -0.034 | 12 Hz | **FAILED** (Cannot fix damping) |
+| **ApexNeuro Active** | **0.672** | **204 Hz** | **SUCCESS** (Restores Amplitude) |
+
 ## How It Works
 
 1. **Energy Proxy** — Compute running estimate of population signal power (hypervector norm or broadband envelope).
